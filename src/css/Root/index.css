@@ -1,0 +1,54 @@
+@font-face {
+   font-family: X360;
+   src: url(../../assets/fonts/x360_font.ttf);
+}
+
+:root {
+   --blue-color: #377DE0;
+   --yellow-color: #E09F22;
+   --green-color: #3DE02D;
+   --purple-color: #5C00BB;
+   
+   
+   --x360-font: 'X360', sans-serif;
+   --roboto-font: 'Roboto', sans-serif;
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+html {
+   font-size: 62.5%;
+}
+
+body {
+   font-size: 1.6rem;
+   font-family: var(--roboto-font);
+   background-color: #333;
+}
+
+ul {
+   list-style: none;
+}
+
+button {
+   position: relative;
+   cursor: pointer;
+   border: none;
+}
+
+button::after {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   
+   width: 100%;
+   height: 100%;
+   
+   opacity: 0;
+   background-color: transparent;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <title>To Do List</title>
+</head>
+<body>
+   <div data-js="todo-container" class="todo-container">
+      <div class="header">
+         <h1 class="header-label">To Do</h1>
+         <div data-js="header-tools-container" class="header-tools-container">
+            <div data-js="close-menu-wrapper" class="close-menu-wrapper"></div>
+            <button data-js="menu-btn" class="menu-btn" type="button">
+               <span class="hamburger-style"></span>
+            </button>
+            <div class="tool-list">
+               <button data-js="open-task-popup-btn" class="tool open-task-popup-btn"><i class="fa-solid fa-plus"></i></button>
+               <button data-js="remove-task-btn" class="tool remove-task-btn"><i class="fa-solid fa-trash"></i></button>
+            </div>
+         </div>
+         
+         <div data-js="popup-input-wrapper" class="popup-input-wrapper">
+            <div class="input-box">
+               <button data-js="close-popup-btn" class="popup-btn close-popup-btn">
+                  <i data-js="close-popup-btn" class="fa-solid fa-plus"></i>
+               </button>
+               <input data-js="task-input" class="insert-task-input" type="text" placeholder="Digite a task aqui...">
+               <div data-js="popup-warning-message" class="popup-warning-message">O campo acima deve ser preenchido!</div>
+               <button data-js="add-task-btn" class="popup-btn add-task-btn">Adicionar <i class="fa-solid fa-circle-up"></i></button>
+            </div>
+         </div>
+      </div>
+      
+      <ul data-js="task-container" class="task-container">
+         <!-- <li class="task-item">
+            <label class="custom-checkbox">
+               <input type="checkbox">
+               <span class="checkmark"></span>
+            </label>
+            <div class="custom-task">
+               <div data-js="closing-wrapper" class="closing-wrapper"></div>
+               <input data-js="task-content" class="task-content" type="text" disabled />
+               <button data-js="rename-task-btn" class="rename-task-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+            </div>
+         </li> -->
+      </ul>
+   </div>
+   
+   <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+   <script>eruda.init();</script>
+</body>
+</html>

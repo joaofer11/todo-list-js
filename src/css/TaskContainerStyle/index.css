@@ -1,0 +1,148 @@
+.task-container {
+   display: block;
+   
+   width: 100%;
+   min-height: 80px;
+   border-radius: 0 0 3px 3px;
+   padding: 0.5rem 1.2rem;
+   
+   background-color: #1B1B1F;
+}
+
+.task-container > .task-item {
+   position: relative;
+   display: flex;
+   align-items: stretch;
+   
+   height: 2.0rem;
+   margin: 1.0rem 0;
+}
+
+.task-item > .custom-checkbox {
+   position: relative;
+   
+   width: 2.0rem;
+   height: inherit;
+   margin-right: 1.4rem;
+}
+
+.custom-checkbox > input {
+   position: absolute;
+   
+   width: 0;
+   height: 0;
+   opacity: 0;
+}
+
+.custom-checkbox > .checkmark {
+   position: absolute;
+   top: 0;
+   left: 0;
+   
+   width: inherit;
+   height: inherit;
+   border: 1px solid var(--yellow-color);
+   background-color: transparent;
+   
+   transition: all 0.2s ease;
+}
+
+.custom-checkbox:hover > .checkmark {
+   background-color: #2E2E2E;
+   border-width: 2px;
+}
+
+.custom-checkbox > input:checked + .checkmark {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: 2px solid var(--green-color);
+}
+
+.custom-checkbox > input:checked + .checkmark::after {
+   content: '';
+   
+   width: 25%;
+   height: 50%;
+   border: solid var(--green-color);
+   border-width: 0 2px 2px 0;
+   
+   transform: rotate(45deg);
+}
+
+.task-item > .custom-task {
+   position: relative;
+   display: flex;
+   width: 90%;
+   max-width: 450px;
+   
+   background-color: #ccc;
+}
+
+.custom-task > .closing-wrapper {
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 40;
+   
+   display: none;
+   width: 100%;
+   height: 100%;
+   
+   background-color: transparent;
+}
+
+.custom-task .task-content {
+   position: relative;
+   z-index: 50;
+   
+   width: 100%;
+   outline: none;
+   border: none;
+   padding: 0.3rem 0.6rem;
+   border-radius: 1px;
+   
+   font-weight: bold;
+   background-color: inherit;
+   
+   transition: all 0.2s ease;
+}
+
+.custom-task >
+.rename-task-btn {
+   position: absolute;
+   top: 50%;
+   right: 0;
+   transform: translateY(-50%);
+   z-index: 50;
+   
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+   width: auto;
+   height: 100%;
+   border: none;
+   border-radius: 1px;
+   padding: 0.5rem;
+   visibility: hidden;
+   
+   color: transparent;
+   background-color: inherit;
+   
+   transition: all 0.2s ease;
+}
+
+.custom-task:hover {
+   background-color: #fff;
+}
+
+.custom-task:hover >
+.rename-task-btn {
+   color: #8C8B8B;
+   visibility: visible;
+}
+
+.custom-task .rename-task-btn:hover {
+   color: #000;
+}
