@@ -1,0 +1,123 @@
+.popup-wrapper--disabled {
+   display: none;
+}
+
+.popup-wrapper--enabled {
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 1000;
+   
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+   width: 100%;
+   height: 100%;
+   
+   background-color: rgba(0, 0, 0, 0.75);
+}
+
+.popup-wrapper__box {
+   display: flex;
+   flex-direction: column;
+   justify-content: start;
+   align-items: center;
+   
+   width: 50%;
+   max-width: 400px;
+   min-height: 10.0rem;
+   border-radius: 2px;
+   padding: 0.4rem 0.8rem;
+   background-color: #3A3939;
+}
+
+.popup-wrapper__close-btn {
+   transform: rotate(45deg);
+   
+   align-self: end;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+   width: 2.3rem;
+   height: 2.3rem;
+   border: 1px solid transparent;
+   border-radius: 50%;
+   padding: 0;
+   
+   color: #ccc;
+   font-size: 2.0rem;
+   background-color: transparent;
+   
+   transition: all 0.2s ease-in;
+}
+
+.popup-wrapper__input {
+   width: 100%;
+   margin-top: 0.3rem;
+   outline: none;
+   border: none;
+   border-radius: 2px;
+   padding: 0.3rem 0.6rem;
+
+   font-weight: bold;
+   font-family: var(--roboto-font);
+}
+
+.pop-wrapper__input::placeholder {
+   color: rgba(0, 0, 0, 0.15);
+}
+
+.popup-wrapper__warning-message--disabled,
+.popup-wrapper__warning-message--enabled {
+   margin-top: 0.5rem;
+   font-weight: bold;
+   font-size: 1.0rem;
+   font-family: Arial, Helvetica, sans-serif;
+   color: #CF1010;
+}
+
+.popup-wrapper__warning-message--disabled {
+   display: none;
+}
+
+.popup-wrapper__warning-message--enabled {
+   display: block;
+}
+
+.popup-wrapper__insert-task-btn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+   margin-top: 0.9rem;
+   border-radius: 2px;
+   padding: 0.4rem 0.8rem;
+   font-size: 1.5rem;
+   font-weight: bold;
+   
+   color: #ccc;
+   background-color: transparent;
+}
+
+.popup-wrapper__insert-task-btn > i {
+   visibility: hidden;
+   font-size: 0;
+   margin-left: 0.5rem;
+   
+   transition: all 0.3s ease;
+}
+
+.popup-wrapper__insert-task-btn:hover > i {
+   visibility: visible;
+   font-size: initial;
+}
+
+.popup-wrapper__box [class*="btn"]:hover {
+   color: #fff;
+   border-color: rgba(255, 255, 255, 0.3);
+   background-color: #242424;
+}

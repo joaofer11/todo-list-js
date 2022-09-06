@@ -9,45 +9,58 @@
    <title>To Do List</title>
 </head>
 <body>
+   
    <div data-js="todo-container" class="todo-container">
+      
       <div class="header">
-         <h1 class="header-label">To Do</h1>
-         <div data-js="header-tools-container" class="header-tools-container">
-            <div data-js="close-menu-wrapper" class="close-menu-wrapper"></div>
-            <button data-js="menu-btn" class="menu-btn" type="button">
+         <h1 class="header__label">To Do</h1>
+         <div data-js="header__nav" class="header__nav--disabled">
+            <!--<div data-js="close-menu-wrapper" class="close-menu-wrapper"></div>-->
+            <button data-js="header__menu-btn" class="header__menu-btn" type="button">
                <span class="hamburger-style"></span>
             </button>
-            <div class="tool-list">
-               <button data-js="open-task-popup-btn" class="tool open-task-popup-btn"><i class="fa-solid fa-plus"></i></button>
-               <button data-js="remove-task-btn" class="tool remove-task-btn"><i class="fa-solid fa-trash"></i></button>
-            </div>
-         </div>
-         
-         <div data-js="popup-input-wrapper" class="popup-input-wrapper">
-            <div class="input-box">
-               <button data-js="close-popup-btn" class="popup-btn close-popup-btn">
-                  <i data-js="close-popup-btn" class="fa-solid fa-plus"></i>
-               </button>
-               <input data-js="task-input" class="insert-task-input" type="text" placeholder="Digite a task aqui...">
-               <div data-js="popup-warning-message" class="popup-warning-message">O campo acima deve ser preenchido!</div>
-               <button data-js="add-task-btn" class="popup-btn add-task-btn">Adicionar <i class="fa-solid fa-circle-up"></i></button>
+            <div class="header__menu">
+               <button data-js="header__open-popup-btn" class="header__open-popup-btn item"><i class="fa-solid fa-plus"></i></button>
+               <button data-js="header__remove-tasks-btn" class="header__remove-tasks-btn item"><i class="fa-solid fa-trash"></i></button>
             </div>
          </div>
       </div>
       
+      
+      <div data-js="popup-wrapper" class="popup-wrapper--disabled">
+         <div class="popup-wrapper__box">
+            <button data-js="popup-wrapper__close-btn" class="popup-wrapper__close-btn">
+               <i class="fa-solid fa-plus"></i>
+            </button>
+            <input data-js="popup-wrapper__input" class="popup-wrapper__input" type="text" placeholder="Digite a task aqui...">
+            <div data-js="popup-wrapper__warning-message" class="popup-wrapper__warning-message--disabled">O campo acima deve ser preenchido!</div>
+            <button data-js="popup-wrapper__insert-task-btn" class="popup-wrapper__insert-task-btn">
+               Adicionar <i class="fa-solid fa-circle-up"></i>
+            </button>
+         </div>
+      </div>
+      
+      <!-- <div data-js="" class="task-removal-confirmation-box">
+         <button data-js="confirm-removal-selections-btn" class="confirm-removal-selections-btn">Deletar</button>
+         <button data-js="cancel-removal-selections-btn" class="cancel-removal-selections-btn">Cancelar</button>
+      </div> -->
+      
       <ul data-js="task-container" class="task-container">
-         <!-- <li class="task-item">
-            <label class="custom-checkbox">
-               <input type="checkbox">
-               <span class="checkmark"></span>
+         <li class="task-container__task-item">
+            <label data-js="checkbox-wrapper" class="task-container__checkbox-wrapper">
+               <input class="task-container__checkbox" type="checkbox" />
+               <span data-js="task-container__custom-checkbox" class="task-container__custom-checkbox--checkmark"></span>
             </label>
-            <div class="custom-task">
-               <div data-js="closing-wrapper" class="closing-wrapper"></div>
-               <input data-js="task-content" class="task-content" type="text" disabled />
-               <button data-js="rename-task-btn" class="rename-task-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+            <div class="task-container__input-content-wrapper">
+               <!--<div data-js="closing-wrapper" class="closing-wrapper"></div> -->
+               <input data-js="task-content" class="task-container__input-as-task-content" type="text" value="Testando" disabled />
+               <button data-js="rename-task-btn" class="task-container__task-content-edit-btn">
+                  <i class="fa-solid fa-pen-to-square"></i>
+               </button>
             </div>
-         </li> -->
+         </li>
       </ul>
+      
    </div>
    
    <script src="//cdn.jsdelivr.net/npm/eruda"></script>

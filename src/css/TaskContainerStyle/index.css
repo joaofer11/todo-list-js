@@ -1,15 +1,57 @@
+/* .task-removal-confirmation-box {
+   display: none;
+   justify-content: space-between;
+   align-items: center;
+   gap: 0.6rem;
+   z-index: 100;
+   
+   margin-top: 0.4rem;
+   padding: 0.4rem 0.8rem;
+   
+   background-color: transparent;
+}
+
+.task-removal-confirmation-box > button {
+   color: #fff;
+   font-weight: bold;
+   font-size: 1.2rem;
+   font-family: Arial, Helvetica, sans-serif;
+   
+   border: 1px solid rgba(255, 255, 255, 0.4);
+   border-radius: 2px;
+   padding: 0.3rem 0.6rem;
+   background: transparent;
+   
+   transition: all 0.2s ease;
+}
+
+.task-removal-confirmation-box > 
+button.confirm-removal-selections-btn:hover {
+   color: #CF1010;
+   font-size: 1.4rem;
+}
+
+.task-removal-confirmation-box > 
+button.cancel-removal-selections-btn:hover {
+   color: #0079FF;
+   font-size: 1.4rem;
+}
+*/
+ 
+ 
+ 
+ 
+ 
+ 
 .task-container {
    display: block;
    
    width: 100%;
    min-height: 80px;
-   border-radius: 0 0 3px 3px;
    padding: 0.5rem 1.2rem;
-   
-   background-color: #1B1B1F;
 }
 
-.task-container > .task-item {
+.task-container__task-item {
    position: relative;
    display: flex;
    align-items: stretch;
@@ -18,7 +60,7 @@
    margin: 1.0rem 0;
 }
 
-.task-item > .custom-checkbox {
+.task-container__checkbox-wrapper {
    position: relative;
    
    width: 2.0rem;
@@ -26,7 +68,7 @@
    margin-right: 1.4rem;
 }
 
-.custom-checkbox > input {
+.task-container__checkbox {
    position: absolute;
    
    width: 0;
@@ -34,43 +76,91 @@
    opacity: 0;
 }
 
-.custom-checkbox > .checkmark {
+.task-container__custom-checkbox--uncheckmark,
+.task-container__custom-checkbox--checkmark {
    position: absolute;
    top: 0;
    left: 0;
    
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
    width: inherit;
    height: inherit;
-   border: 1px solid var(--yellow-color);
    background-color: transparent;
    
    transition: all 0.2s ease;
 }
 
-.custom-checkbox:hover > .checkmark {
+.task-container__custom-checkbox--checkmark {
+	border: 1px solid var(--yellow-color);
+}
+
+.task-container__custom-checkbox--uncheckmark {
+   border: 1px solid #FF1313;
+}
+
+.task-container__checkbox-wrapper:hover > 
+.task-container__custom-checkbox--checkmark {
    background-color: #2E2E2E;
    border-width: 2px;
 }
 
-.custom-checkbox > input:checked + .checkmark {
-   display: flex;
-   justify-content: center;
-   align-items: center;
+.task-container__checkbox-wrapper:hover > 
+.task-container__custom-checkbox--uncheckmark {
+   background-color: #2E2E2E;
+   border-width: 2px;
+}
+
+.task-container__checkbox:checked + 
+.task-container__custom-checkbox--checkmark {
    border: 2px solid var(--green-color);
 }
 
-.custom-checkbox > input:checked + .checkmark::after {
-   content: '';
-   
-   width: 25%;
-   height: 50%;
-   border: solid var(--green-color);
-   border-width: 0 2px 2px 0;
-   
-   transform: rotate(45deg);
+.task-container__checkbox:checked + 
+.task-container__custom-checkbox--checkmark::after {
+	content: '';
+	
+	width: 25%;
+	height: 50%;
+	border: solid var(--green-color);
+	border-width: 0 2px 2px 0;
+	
+	transform: rotate(45deg);
 }
 
-.task-item > .custom-task {
+.task-container__checkbox:checked + 
+.task-container__custom-checkbox--uncheckmark {
+   border: 2px solid #FF1313;
+}
+
+.task-container__checkbox:checked + 
+.task-container__custom-checkbox--uncheckmark::before,
+.task-container__checkbox:checked + 
+.task-container__custom-checkbox--uncheckmark::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	
+	display: block;
+	width: 2px;
+	height: 80%;
+	background-color: #FF1313;
+}
+
+.task-container__checkbox:checked + 
+.task-container__custom-checkbox--uncheckmark::before {
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.task-container__checkbox:checked + 
+.task-container__custom-checkbox--uncheckmark::after {
+	   transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.task-container__input-content-wrapper {
    position: relative;
    display: flex;
    width: 90%;
@@ -79,7 +169,7 @@
    background-color: #ccc;
 }
 
-.custom-task > .closing-wrapper {
+/* .custom-task > .closing-wrapper {
    position: fixed;
    top: 0;
    left: 0;
@@ -90,9 +180,9 @@
    height: 100%;
    
    background-color: transparent;
-}
+} */
 
-.custom-task .task-content {
+.task-container__input-as-task-content {
    position: relative;
    z-index: 50;
    
@@ -108,8 +198,7 @@
    transition: all 0.2s ease;
 }
 
-.custom-task >
-.rename-task-btn {
+.task-container__task-content-edit-btn {
    position: absolute;
    top: 50%;
    right: 0;
@@ -133,16 +222,17 @@
    transition: all 0.2s ease;
 }
 
-.custom-task:hover {
+.task-container__input-content-wrapper:hover {
    background-color: #fff;
 }
 
-.custom-task:hover >
-.rename-task-btn {
+.task-container__input-content-wrapper:hover >
+.task-container__task-content-edit-btn {
    color: #8C8B8B;
    visibility: visible;
 }
 
-.custom-task .rename-task-btn:hover {
+.task-container__input-content-wrapper
+.task-container__task-content-edit-btn:hover {
    color: #000;
 }
