@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-   mode: 'development',
+   mode: 'production',
    entry: path.resolve(__dirname, 'src/scripts', 'index.ts'),
    output: {
       path: path.resolve(__dirname, 'dist'),
@@ -28,17 +28,18 @@ module.exports = {
             ]
          },
          {
-            test: /\.(jpg|jpeg|png|svg)$/,
+            test: /\.(otf|ttf)$/,
             type: 'asset/resource',
             generator: {
-               filename: 'assets/images/[name].[hash][ext][query]'
+               filename: 'assets/fonts/[name].[hash][ext][query]'
             }
          }
       ]
    },
    plugins: [
       new HtmlWebpackPlugin({
-         template: path.resolve(__dirname, 'src', 'index.html')
+         template: path.resolve(__dirname, 'src', 'index.html'),
+         publicPath: './dist/'
       }),
       new MiniCssExtractPlugin({
          filename: 'css/[name][contenthash].bundle.css'

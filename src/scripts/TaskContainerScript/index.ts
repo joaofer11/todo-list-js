@@ -1,60 +1,103 @@
-// const renameTaskBtn = document.querySelector('[data-js="rename-task-btn"]')! as HTMLButtonElement
+import { showOrHideTasksRemovalConfirmationBox } from '../TasksRemovalConfirmationBoxScript'
+import { disableMenuPointerEvent } from '../HeaderScript'
+import { insertOutsideClickListeners , removeOutsideClickListeners } from '../OutsideClickScript'
 
-// // TYPES
-// type TTaskElement = HTMLInputElement | HTMLButtonElement
+// VARIABLES
+const taskContainerEl = document.querySelector('[data-js="task-container"]')!
 
-// console.log(taskContainer)
-
-// // FUNCTION TREE
-// const removeCheckedElements = () => {
-//    const checkboxes = [...document.querySelectorAll('[data-js="checkbox-wrapper"] > input')!] as HTMLInputElement[]
-//    const checkedBoxes = checkboxes?.filter(checkbox => checkbox.checked)
+// FUNCTION TREE
+const changeToCheckboxDefaultState = (checkmarkClass: string, uncheckmarkClass: string) => (customCheckbox: HTMLSpanElement) => {
+   const checkboxInputEl = customCheckbox.previousElementSibling! as HTMLInputElement
+   checkboxInputEl.checked = (checkboxInputEl.dataset.checked === 'true') ? true : false
    
-//    checkedBoxes?.forEach(checkedBox => {
-//       const liItem = checkedBox.closest('li')!
-//       liItem.remove()
-//    })
-// }
+   customCheckbox.classList.replace(uncheckmarkClass, checkmarkClass)
+}
 
-// const openInputTextField = (target: TTaskElement) => {
-//    const renameTaskBtn = target
-//    const inputElement = renameTaskBtn.previousElementSibling! as HTMLInputElement
-//    const closingWrapper = inputElement.previousElementSibling! as HTMLDivElement
+const changeToRemovalAndClearCheckbox = (checkmarkClass: string, uncheckmarkClass: string) => (customCheckbox: HTMLSpanElement) => {
+   const checkboxInputEl = customCheckbox.previousElementSibling! as HTMLInputElement
+   checkboxInputEl.checked = false
    
-//    renameTaskBtn.style.display = 'none'
-//    inputElement.removeAttribute('disabled')
-//    inputElement.focus()
-//    closingWrapper.style.display = 'block'
-// }
+   customCheckbox.classList.replace(checkmarkClass, uncheckmarkClass)
+}
 
-// const blockInputTextField = (target: TTaskElement) => {
-//    const closingWrapper = target
-//    const inputElement = closingWrapper.nextElementSibling!
-//    const renameTaskBtn = inputElement.nextElementSibling!as HTMLButtonElement
-
-//    closingWrapper.style.display = 'none'
-
-//    inputElement.setAttribute('disabled', 'disabled')
-//    setTimeout(() => renameTaskBtn.style.display = 'flex', 200)
-// }
-
-// const toggleInputTextField = (clickedElement: string, { target }: any) => ({
-//    'closing-wrapper': blockInputTextField,
-//    'rename-task-btn': openInputTextField
-// })[clickedElement]!(target)
-
-
-// const handleClickedElement = (e: any) => {
-//    const allowedElements = ['closing-wrapper', 'rename-task-btn']
-//    const clickedElement = e.target.dataset.js
+export const changeCheckboxForMultipleTasksRemovalOrDefaultState = () => {
+   const customCheckboxesAsArray = [...document.querySelectorAll('[data-js="task-container__custom-checkbox"]')!] as HTMLSpanElement[]
    
-//    const itsAnAllowedElement = allowedElements.some(element => element === clickedElement)
+   const checkmarkClass = 'task-container__custom-checkbox--checkmark'
+   const uncheckmarkClass = 'task-container__custom-checkbox--uncheckmark'
+
+   const onlyOneHasCheckmarkClass = customCheckboxesAsArray[0]?.classList[0].includes('--checkmark')
    
-//    if (itsAnAllowedElement) {
-//       toggleInputTextField(clickedElement, e)
-//    }
-// }
+   removeOutsideClickListeners()
+   if (onlyOneHasCheckmarkClass) {
+      customCheckboxesAsArray.forEach(changeToRemovalAndClearCheckbox(checkmarkClass, uncheckmarkClass))
+      showOrHideTasksRemovalConfirmationBox()
+      return
+   }
+   
+   customCheckboxesAsArray.forEach(changeToCheckboxDefaultState(checkmarkClass, uncheckmarkClass))
+}
+
+const toggleTaskContentEditBtn = (taskContentEditBtn: HTMLButtonElement, visible: boolean = true) => {
+   const visibleEditBtnClass = 'task-container__task-content-edit-btn--visible'
+   const hiddenEditBtnClass = 'task-container__task-content-edit-btn--hidden'
+   
+   switch (visible) {
+      case true:
+         taskContentEditBtn.classList.replace(hiddenEditBtnClass, visibleEditBtnClass)
+         break;
+      case false:
+         taskContentEditBtn.classList.replace(visibleEditBtnClass, hiddenEditBtnClass)
+         break;
+   }
+}
+
+const handleTaskContentEditBtnClick = (taskContentEditBtn: HTMLButtonElement) => {
+   const inputElAsTaskContent = taskContentEditBtn.previousElementSibling! as HTMLInputElement
+   const isInputDisabled = inputElAsTaskContent.disabled === true
+   
+   const visibleEditBtnClass = 'task-container__task-content-edit-btn--visible'
+   const hiddenEditBtnClass = 'task-container__task-content-edit-btn--hidden'
+   
+   const taskItemData = taskContentEditBtn.closest('[data-js*="task-item"]')! as HTMLLIElement
+   
+   if (isInputDisabled) {
+      inputElAsTaskContent.disabled = false
+      inputElAsTaskContent.focus()
+      toggleTaskContentEditBtn(taskContentEditBtn, false)
+   }
+}
+
+const handleCustomCheckboxClick = (customCheckbox: HTMLSpanElement) => {
+   const checkboxInputEl = customCheckbox.previousElementSibling! as HTMLInputElement
+   const isInputCheckboxMarked = checkboxInputEl.checked === true
+   
+   if (!isInputCheckboxMarked) {
+      checkboxInputEl.setAttribute('data-checked', 'true')
+      return
+   }
+   
+   checkboxInputEl.setAttribute('data-checked', 'false')
+}
+
+const runCorrespondingFuncToTaskContainerElements = (clickedElement: any) => ({
+   'task-container__custom-checkbox': handleCustomCheckboxClick,
+   'task-container__task-content-edit-btn': handleTaskContentEditBtnClick,
+})[clickedElement.dataset.js as string]!(clickedElement)
+
+const checkClickedElementOnTaskContainer = (e: any) => {
+   const allowedElements = [
+      'task-container__custom-checkbox',
+      'task-container__task-content-edit-btn'
+   ]
+   const clickedElement = e.target
+   const itsAnAllowedElement = allowedElements.some(element => element === clickedElement.dataset.js)
+   
+   if (itsAnAllowedElement) {
+      runCorrespondingFuncToTaskContainerElements(clickedElement)
+   }
+}
 
 
-// // EVENT LISTENERS
-// //taskContainer.addEventListener('touchstart', handleClickedElement)
+// EVENT LISTENERS
+taskContainerEl.addEventListener('touchstart', checkClickedElementOnTaskContainer)

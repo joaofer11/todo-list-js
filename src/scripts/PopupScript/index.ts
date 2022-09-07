@@ -19,18 +19,17 @@ const showOrHideWarningMessage = (showOrHide: boolean) => {
 }
 
 const createTaskAsLiElement = (inputValueAsTaskContent: string) => {
-   const taskItemAsLiElement = createDomElement('li')({})(['task-container__task-item'])
+   const taskItemAsLiElement = createDomElement('li')({'data-js': 'task-container__task-item'})(['task-container__task-item'])
 
    const checkboxWrapper = createDomElement('label')({})(['task-container__checkbox-wrapper'])
-   const checkboxInput = createDomElement('input')({type: 'checkbox'})(['task-container__checkbox'])
-   const customCheckbox = createDomElement('span')({'data-js': 'custom-checkbox'})(['task-container__custom-checkbox--checkmark'])
+   const checkboxInput = createDomElement('input')({'data-js': 'task-container__checkbox', type: 'checkbox'})(['task-container__checkbox'])
+   const customCheckbox = createDomElement('span')({'data-js': 'task-container__custom-checkbox'})(['task-container__custom-checkbox--checkmark'])
 
    checkboxWrapper.append(checkboxInput, customCheckbox)
 
    const inputContentWrapper = createDomElement('div')({})(['task-container__input-content-wrapper'])
-   //const closingWrapper = createDomElement('div')({'data-js': 'closing-wrapper'})(['closing-wrapper'])
    const inputAsTaskContent = createDomElement('input')({type: 'text', disabled: 'disabled', value: inputValueAsTaskContent})(['task-container__input-as-task-content'])
-   const taskContentEditBtn = createDomElement('button')({'data-btn': '', 'data-js': 'rename-task-btn'})(['task-container__task-content-edit-btn'])
+   const taskContentEditBtn = createDomElement('button')({'data-btn': '', 'data-js': 'task-container__task-content-edit-btn'})(['task-container__task-content-edit-btn--visible'])
    taskContentEditBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>'
 
    inputContentWrapper.append(inputAsTaskContent, taskContentEditBtn)
@@ -62,6 +61,14 @@ const closePopup = () => {
    const hidden = 'popup-wrapper--disabled'
    
    popupWrapperEl.classList.replace(shown, hidden)
+}
+
+export const showPopup = () => {
+   const popupWrapper = document.querySelector('[data-js="popup-wrapper"]') !
+   const shown = 'popup-wrapper--enabled'
+   const hidden = 'popup-wrapper--disabled'
+
+   popupWrapper.classList.replace(hidden, shown)
 }
 
 const runFuncCorrespondingToPopupElements = (elementName: string) => ({

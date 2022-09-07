@@ -2,4 +2,5 @@
 @import './TodoContainerStyle';
 @import './HeaderStyle';
 @import './PopupStyle';
+@import './TasksRemovalConfirmationStyle';
 @import './TaskContainerStyle';

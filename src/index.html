@@ -15,11 +15,10 @@
       <div class="header">
          <h1 class="header__label">To Do</h1>
          <div data-js="header__nav" class="header__nav--disabled">
-            <!--<div data-js="close-menu-wrapper" class="close-menu-wrapper"></div>-->
             <button data-js="header__menu-btn" class="header__menu-btn" type="button">
                <span class="hamburger-style"></span>
             </button>
-            <div class="header__menu">
+            <div data-js="header__menu" class="header__menu--interactive">
                <button data-js="header__open-popup-btn" class="header__open-popup-btn item"><i class="fa-solid fa-plus"></i></button>
                <button data-js="header__remove-tasks-btn" class="header__remove-tasks-btn item"><i class="fa-solid fa-trash"></i></button>
             </div>
@@ -40,21 +39,20 @@
          </div>
       </div>
       
-      <!-- <div data-js="" class="task-removal-confirmation-box">
-         <button data-js="confirm-removal-selections-btn" class="confirm-removal-selections-btn">Deletar</button>
-         <button data-js="cancel-removal-selections-btn" class="cancel-removal-selections-btn">Cancelar</button>
-      </div> -->
+      <div data-js="tasks-removal-confirmation-box" class="tasks-removal-confirmation-box--disabled">
+         <button data-js="tasks-removal-confirmation-box__confirm-btn" class="tasks-removal-confirmation-box__confirm-btn">Deletar</button>
+         <button data-js="tasks-removal-confirmation-box__cancel-btn" class="tasks-removal-confirmation-box__cancel-btn">Cancelar</button>
+      </div>
       
       <ul data-js="task-container" class="task-container">
-         <li class="task-container__task-item">
-            <label data-js="checkbox-wrapper" class="task-container__checkbox-wrapper">
-               <input class="task-container__checkbox" type="checkbox" />
+         <li data-js="task-container__task-item" class="task-container__task-item">
+            <label class="task-container__checkbox-wrapper">
+               <input data-js="task-container__checkbox" class="task-container__checkbox" type="checkbox" />
                <span data-js="task-container__custom-checkbox" class="task-container__custom-checkbox--checkmark"></span>
             </label>
             <div class="task-container__input-content-wrapper">
-               <!--<div data-js="closing-wrapper" class="closing-wrapper"></div> -->
                <input data-js="task-content" class="task-container__input-as-task-content" type="text" value="Testando" disabled />
-               <button data-js="rename-task-btn" class="task-container__task-content-edit-btn">
+               <button data-js="task-container__task-content-edit-btn" class="task-container__task-content-edit-btn--visible">
                   <i class="fa-solid fa-pen-to-square"></i>
                </button>
             </div>
@@ -62,8 +60,5 @@
       </ul>
       
    </div>
-   
-   <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-   <script>eruda.init();</script>
 </body>
 </html>

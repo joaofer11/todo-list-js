@@ -1,0 +1,40 @@
+.tasks-removal-confirmation-box--disabled {
+   display: none;
+}
+
+.tasks-removal-confirmation-box--enabled {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   gap: 0.6rem;
+   z-index: 100;
+   
+   margin-top: 0.4rem;
+   padding: 0.4rem 0.8rem;
+   
+   background-color: transparent;
+}
+
+.tasks-removal-confirmation-box--enabled > button {
+   color: #fff;
+   font-weight: bold;
+   font-size: 1.2rem;
+   font-family: Arial, Helvetica, sans-serif;
+   
+   border: 1px solid rgba(255, 255, 255, 0.4);
+   border-radius: 2px;
+   padding: 0.3rem 0.6rem;
+   background: transparent;
+   
+   transition: all 0.2s ease;
+}
+
+.tasks-removal-confirmation-box__confirm-btn:hover {
+   color: #CF1010;
+   font-size: 1.4rem;
+}
+
+.tasks-removal-confirmation-box__cancel-btn:hover {
+   color: #0079FF;
+   font-size: 1.4rem;
+}

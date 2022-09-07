@@ -1,53 +1,7 @@
-/* .task-removal-confirmation-box {
-   display: none;
-   justify-content: space-between;
-   align-items: center;
-   gap: 0.6rem;
-   z-index: 100;
-   
-   margin-top: 0.4rem;
-   padding: 0.4rem 0.8rem;
-   
-   background-color: transparent;
-}
-
-.task-removal-confirmation-box > button {
-   color: #fff;
-   font-weight: bold;
-   font-size: 1.2rem;
-   font-family: Arial, Helvetica, sans-serif;
-   
-   border: 1px solid rgba(255, 255, 255, 0.4);
-   border-radius: 2px;
-   padding: 0.3rem 0.6rem;
-   background: transparent;
-   
-   transition: all 0.2s ease;
-}
-
-.task-removal-confirmation-box > 
-button.confirm-removal-selections-btn:hover {
-   color: #CF1010;
-   font-size: 1.4rem;
-}
-
-.task-removal-confirmation-box > 
-button.cancel-removal-selections-btn:hover {
-   color: #0079FF;
-   font-size: 1.4rem;
-}
-*/
- 
- 
- 
- 
- 
- 
 .task-container {
    display: block;
    
    width: 100%;
-   min-height: 80px;
    padding: 0.5rem 1.2rem;
 }
 
@@ -169,22 +123,14 @@ button.cancel-removal-selections-btn:hover {
    background-color: #ccc;
 }
 
-/* .custom-task > .closing-wrapper {
-   position: fixed;
-   top: 0;
-   left: 0;
-   z-index: 40;
-   
-   display: none;
-   width: 100%;
-   height: 100%;
-   
-   background-color: transparent;
-} */
+.task-container .outside-click-wrapper--enabled {
+   z-index: 10;
+   background-color: blue;
+}
 
 .task-container__input-as-task-content {
    position: relative;
-   z-index: 50;
+   z-index: 11;
    
    width: 100%;
    outline: none;
@@ -198,12 +144,13 @@ button.cancel-removal-selections-btn:hover {
    transition: all 0.2s ease;
 }
 
-.task-container__task-content-edit-btn {
+.task-container__task-content-edit-btn--visible,
+.task-container__task-content-edit-btn--hidden {
    position: absolute;
    top: 50%;
    right: 0;
    transform: translateY(-50%);
-   z-index: 50;
+   z-index: 12;
    
    display: flex;
    justify-content: center;
@@ -218,7 +165,9 @@ button.cancel-removal-selections-btn:hover {
    
    color: transparent;
    background-color: inherit;
-   
+}
+
+.task-container__task-content-edit-btn--visible {
    transition: all 0.2s ease;
 }
 
@@ -227,12 +176,15 @@ button.cancel-removal-selections-btn:hover {
 }
 
 .task-container__input-content-wrapper:hover >
-.task-container__task-content-edit-btn {
+.task-container__task-content-edit-btn--visible {
    color: #8C8B8B;
    visibility: visible;
 }
 
-.task-container__input-content-wrapper
-.task-container__task-content-edit-btn:hover {
+.task-container__task-content-edit-btn--visible:hover {
    color: #000;
+}
+
+.task-container__task-content-edit-btn--hidden {
+   opacity: 0;
 }
